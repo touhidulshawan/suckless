@@ -6,13 +6,13 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappx     = 5;        /* gaps between windows */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=12", "fontawesome:size=12" };
+static const char *fonts[]          = { "JetBrainsMono NF SemiBold:size=10", "JoyPixels:size=14" };
 static const char dmenufont[]       = "monospace:size=12";
 static const char col_gray1[]       = "#282828";
 static const char col_gray2[]       = "#3c3826";
-static const char col_gray3[]       = "#665c54";
+static const char col_gray3[]       = "#fabd2f";
 static const char col_gray4[]       = "#ebdbb2";
-static const char col_cyan[]        = "#b16286";
+static const char col_cyan[]        = "#076678";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -20,7 +20,8 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+/* static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }; */
+static const char *tags[] = { "󱇙", "󰖟" , "", "", "󰿎"};
 
 static const Rule rules[] = {
 	/* xprop(1):
