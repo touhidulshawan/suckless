@@ -31,6 +31,7 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     iscentered   isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            0,           1,           -1 },
 	{ "firefox",  NULL,       NULL,       1 << 1,       0,           0,           -1 },
+    {"firefox",   "Toolkit",  "Picture-in-Picture", 0,  0,           1,           -1 },
 	{ "krita",    NULL,       NULL,       1 << 2,       0,           0,           -1 },
 	{ "mpv",      NULL,       NULL,       1 << 4,       0,           0,           -1 },
 	{ "Thunar",   NULL,       NULL,       1 << 5,       0,           0,           -1 },
@@ -116,6 +117,7 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY,                       XK_s,      togglesticky,   {0} },
 };
 
 /* button definitions */
