@@ -12,7 +12,7 @@ static const char col_gray1[]       = "#282828";
 static const char col_gray2[]       = "#504945";
 static const char col_gray3[]       = "#bdae93";
 static const char col_gray4[]       = "#ebdbb2";
-static const char col_cyan[]        = "#79740e";
+static const char col_cyan[]        = "#d65d0e";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -21,7 +21,7 @@ static const char *colors[][3]      = {
 
 /* tagging */
 /* static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }; */
-static const char *tags[] = { " 󱇙 ", " 󰖟 " , "  ", "  ", " 󰿎 "};
+static const char *tags[] = { " 󱇙 ", " 󰖟 " , "  ", "  ", "  "};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -31,8 +31,9 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     iscentered   isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            0,           1,           -1 },
 	{ "firefox",  NULL,       NULL,       1 << 1,       0,           0,           -1 },
-	{ "Code",     NULL,       NULL,       1 << 2,       0,           0,           -1 },
-	{ "Pcmanfm",  NULL,       NULL,       1 << 4,       0,           0,           -1 },
+	{ "krita",    NULL,       NULL,       1 << 2,       0,           0,           -1 },
+	{ "mpv",      NULL,       NULL,       1 << 4,       0,           0,           -1 },
+	{ "Thunar",   NULL,       NULL,       1 << 5,       0,           0,           -1 },
 };
 
 /* layout(s) */
@@ -44,7 +45,7 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
+	{ "><>",      NULL},    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
 	{ "|M|",      centeredmaster },
 	{ ">M>",      centeredfloatingmaster },
@@ -69,6 +70,7 @@ static const char *termcmd[]  = { "alacritty", NULL };
 static const char *browser[]  = {"firefox", NULL};
 static const char *fileBrowser[] = {"pcmanfm", NULL};
 static const char *wallpaper[]  = {"sh", "-c", "feh --recursive --bg-fill --randomize $HOME/Pictures/wallpapers/anime/", NULL};
+static const char *xppen[]  = {"sh" , "-c" "systemctl --user restart xppentablet.service", NULL};
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -85,10 +87,10 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Escape, view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,                       XK_f,      fullscreen,     {0}},
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[3]} },
-	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[4]} },
+	{ Altkey|ShiftMask,             XK_m,      setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
@@ -102,6 +104,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
     { MODKEY,                       XK_b,      spawn,          {.v = browser}},
     { MODKEY|ShiftMask,             XK_w,      spawn,          {.v = wallpaper}},
+    { MODKEY|ShiftMask,             XK_x,      spawn,          {.v = xppen}},
     { MODKEY,                       XK_e,      spawn,          {.v = fileBrowser}},
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
