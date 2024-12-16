@@ -72,6 +72,7 @@ static const char *browser[]  = {"firefox", NULL};
 static const char *fileBrowser[] = {"Thunar", NULL};
 static const char *wallpaper[]  = {"sh", "-c", "feh --recursive --bg-fill --randomize $HOME/Pictures/wallpapers/anime/", NULL};
 static const char *xppen[]  = {"sh" , "-c" "systemctl --user restart xppentablet.service", NULL};
+static const char *krita[]  = {"krita", NULL};
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -106,7 +107,11 @@ static const Key keys[] = {
     { MODKEY,                       XK_b,      spawn,          {.v = browser}},
     { MODKEY|ShiftMask,             XK_w,      spawn,          {.v = wallpaper}},
     { MODKEY|ShiftMask,             XK_x,      spawn,          {.v = xppen}},
+    { MODKEY|ShiftMask,             XK_period, spawn,          {.v = krita}},
     { MODKEY,                       XK_e,      spawn,          {.v = fileBrowser}},
+    { MODKEY,                       XK_bracketright, spawn,    SHCMD("amixer set Master 5%+")},
+    { MODKEY,                       XK_bracketleft, spawn,     SHCMD("amixer set Master 5%-")},
+    { MODKEY,                       XK_backslash, spawn,       SHCMD("amixer set Master toggle")},
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
