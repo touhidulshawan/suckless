@@ -112,6 +112,7 @@ static const Key keys[] = {
     { MODKEY,                       XK_bracketright, spawn,    SHCMD("amixer set Master 5%+")},
     { MODKEY,                       XK_bracketleft, spawn,     SHCMD("amixer set Master 5%-")},
     { MODKEY,                       XK_backslash, spawn,       SHCMD("amixer set Master toggle")},
+    { MODKEY|ControlMask,           XK_l,      spawn,          SHCMD("betterlockscreen -l")},
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
