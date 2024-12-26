@@ -120,6 +120,7 @@ static const Key keys[] = {
     { MODKEY,                       XK_backslash, spawn,       SHCMD("amixer set Master toggle")},
     { MODKEY|ControlMask,           XK_l,      spawn,          SHCMD("betterlockscreen -l")},
     { MODKEY,                       XK_a,      spawn,          SHCMD("copyq toggle")},
+    {MODKEY,                        XK_o,      spawn,          SHCMD("emacsclient -c")},
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
