@@ -17,30 +17,32 @@ static const char col_gray1[]       = "#282828";
 static const char col_gray2[]       = "#504945";
 static const char col_gray3[]       = "#bdae93";
 static const char col_gray4[]       = "#ebdbb2";
-static const char col_cyan[]        = "#b16286";
+static const char col_blue[]        = "#458588";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeSel]  = { col_gray4, col_blue,  col_blue},
 };
 
 /* tagging */
 /* static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }; */
-static const char *tags[] = { " 󱇙 ", " 󰖟 " , "  ", "  ", "  "};
+static const char *tags[] = { " 󱇙 ", " 󰖟 " , "  ", "  ", "  ", "  "};
 
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     iscentered   isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            0,           1,           -1 },
-	{ "firefox",  NULL,       NULL,       1 << 1,       0,           0,           -1 },
-    {"firefox",   "Toolkit",  "Picture-in-Picture", 0,  0,           1,           -1 },
-	{ "krita",    NULL,       NULL,       1 << 2,       0,           0,           -1 },
-	{ "mpv",      NULL,       NULL,       1 << 4,       0,           0,           -1 },
-	{ "Thunar",   NULL,       NULL,       1 << 5,       0,           0,           -1 },
-	{ "copyq",    NULL,       NULL,       0,            1,           1,           -1 },
+	/* class      instance    title       tags mask     switchtotag    iscentered   isfloating   monitor */
+	{ "Gimp",     NULL,       NULL,       0,                0,            0,           1,           -1 },
+	{ "firefox",  NULL,       NULL,       1 << 1,           1,            0,           0,           -1 },
+    {"firefox",   "Toolkit",  "Picture-in-Picture", 0,      0,            0,           1,           -1 },
+	{ "krita",    NULL,       NULL,       1 << 2,           1,            0,           0,           -1 },
+	{ "mpv",      NULL,       NULL,       1 << 4,           1,            0,           0,           -1 },
+	{ "Thunar",   NULL,       NULL,       1 << 5,           1,            0,           0,           -1 },
+    { "Emacs",    NULL,       NULL,       1 << 3,           1,            0,           0,           -1 },
+	{ "copyq",    NULL,       NULL,       0,                0,            1,           1,           -1 },
+	{ "qBittorrent",    NULL,       NULL,       1 << 5,     1,            0,           0,           -1 },
 
 };
 
@@ -75,7 +77,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_blue, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 static const char *browser[]  = {"firefox", NULL};
 static const char *fileBrowser[] = {"Thunar", NULL};
@@ -124,7 +126,7 @@ static const Key keys[] = {
     { MODKEY,                       XK_backslash, spawn,       SHCMD("amixer set Master toggle")},
     { MODKEY|ControlMask,           XK_l,      spawn,          SHCMD("betterlockscreen -l")},
     { MODKEY,                       XK_a,      spawn,          SHCMD("copyq toggle")},
-    {MODKEY,                        XK_o,      spawn,          SHCMD("emacsclient -c")},
+    { MODKEY,                       XK_o,      spawn,          SHCMD("emacsclient -c")},
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
