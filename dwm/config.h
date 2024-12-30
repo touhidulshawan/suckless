@@ -28,6 +28,9 @@ static const char *colors[][3]      = {
 /* static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }; */
 static const char *tags[] = { " 󱇙 ", " 󰖟 " , "  ", "  ", "  ", "  "};
 
+/* Lockfile */
+static char lockfile[] = "/tmp/dwm.lock";
+
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
@@ -37,6 +40,7 @@ static const Rule rules[] = {
 	{ "Gimp",     NULL,       NULL,       0,                0,            0,           1,           -1 },
 	{ "firefox",  NULL,       NULL,       1 << 1,           1,            0,           0,           -1 },
     {"firefox",   "Toolkit",  "Picture-in-Picture", 0,      0,            0,           1,           -1 },
+    {"firefox",   "Library",  "Library",  0,                0,            1,           1,           -1 },
 	{ "krita",    NULL,       NULL,       1 << 2,           1,            0,           0,           -1 },
 	{ "mpv",      NULL,       NULL,       1 << 4,           1,            0,           0,           -1 },
 	{ "Thunar",   NULL,       NULL,       1 << 5,           1,            0,           0,           -1 },
