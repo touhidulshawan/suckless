@@ -81,7 +81,6 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "alacritty", NULL };
 static const char *browser[]  = {"firefox", NULL};
 static const char *fileBrowser[] = {"Thunar", NULL};
-static const char *wallpaper[]  = {"sh", "-c", "feh --recursive --bg-fill --randomize $HOME/Pictures/wallpapers/anime/", NULL};
 static const char *krita[]  = {"krita", NULL};
 
 static const Key keys[] = {
@@ -117,16 +116,23 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
     { MODKEY,                       XK_b,      spawn,          {.v = browser}},
-    { MODKEY|ShiftMask,             XK_w,      spawn,          {.v = wallpaper}},
-    { MODKEY|ShiftMask,             XK_x,      spawn,          SHCMD("systemctl --user restart xppentablet.service")},
     { MODKEY|ShiftMask,             XK_period, spawn,          {.v = krita}},
     { MODKEY,                       XK_e,      spawn,          {.v = fileBrowser}},
+    { MODKEY|ShiftMask,             XK_w,      spawn,          SHCMD("wallpaper random")},
+    { MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("wallpaper show")},
+    { MODKEY|ShiftMask,             XK_x,      spawn,          SHCMD("systemctl --user restart xppentablet.service")},
+    { MODKEY|ShiftMask,             XK_i,      spawn,          SHCMD("firefox --private-window")},
     { MODKEY,                       XK_bracketright, spawn,    SHCMD("amixer set Master 5%+")},
     { MODKEY,                       XK_bracketleft, spawn,     SHCMD("amixer set Master 5%-")},
     { MODKEY,                       XK_backslash, spawn,       SHCMD("amixer set Master toggle")},
     { MODKEY|ControlMask,           XK_l,      spawn,          SHCMD("betterlockscreen -l")},
+    { MODKEY|ShiftMask,             XK_underscore,      spawn, SHCMD("betterlockscreen -s")},
     { MODKEY,                       XK_a,      spawn,          SHCMD("copyq toggle")},
     { MODKEY,                       XK_o,      spawn,          SHCMD("emacsclient -c")},
+    { MODKEY,                       XK_semicolon, spawn,       SHCMD("changebrightness up")},
+    { MODKEY|ShiftMask,             XK_semicolon, spawn,           SHCMD("changebrightness down")},
+    { 0,                             XK_Print,  spawn,         SHCMD("scrot ~/Pictures/Screenshots/%b%d::%H%M%S.png --focused -b && notify-send 'Screenshot taken' 'Saved in ~/Pictures/Screenshots' || exit")},
+    { ShiftMask,                    XK_Print,  spawn,          SHCMD("scrot ~/Pictures/Screenshots/%b%d::%H%M%S.png --select --line mode=edge && notify-send 'Screenshot taken' 'Saved in ~/Pictures/Screenshots' || exit")},
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
