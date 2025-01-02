@@ -130,7 +130,7 @@ static const Key keys[] = {
     { MODKEY,                       XK_bracketleft, spawn,     SHCMD("amixer set Master 5%-")},
     { MODKEY,                       XK_backslash, spawn,       SHCMD("amixer set Master toggle")},
     { MODKEY|ControlMask,           XK_l,      spawn,          SHCMD("betterlockscreen -l")},
-    { MODKEY|ShiftMask,             XK_underscore,      spawn, SHCMD("betterlockscreen -s")},
+    { MODKEY|ShiftMask,             XK_minus,  spawn, SHCMD("betterlockscreen -s")},
     { MODKEY,                       XK_a,      spawn,          SHCMD("copyq toggle")},
     { MODKEY,                       XK_o,      spawn,          SHCMD("emacsclient -c")},
     { MODKEY,                       XK_semicolon, spawn,       SHCMD("changebrightness up")},
