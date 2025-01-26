@@ -50,7 +50,7 @@ static const Rule rules[] = {
 	{ "Thunar",   NULL,       NULL,       1 << 5,           1,            0,           0,           -1 },
     { "Emacs",    NULL,       NULL,       1 << 3,           1,            0,           0,           -1 },
 	{ "copyq",    NULL,       NULL,       0,                0,            1,           1,           -1 },
-	{ "qBittorrent",    NULL,       NULL,       1 << 5,     1,            0,           0,           -1 },
+	{ "qBittorrent",    NULL, NULL,       1 << 8,           1,            0,           0,           -1 },
 	{ "feh",      NULL,       NULL,       0,                0,            1,           1,           -1 },
 
 };
