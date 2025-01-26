@@ -70,8 +70,8 @@ static const char vol[]         = "[ `amixer sget Master | tail -n 1 | awk '{pri
 
 static const struct arg args[] = {
 	/* function format          argument */
-    { ram_used, "[  %s] ",                 NULL    },
+    { ram_used, "[ %s] ",                 NULL    },
     { run_command, "[󰗅 %s] ",               vol     },
-    { battery_perc, "[  %s%%] ",           "BAT0"    },
-	{ datetime, "%s",                       " %a, %b %d   %I:%M:%S %p " },
+    /* { battery_perc, "[  %s%%] ",           "BAT0"    }, */
+	{ datetime, "%s",                       " %a,%b-%d  %I:%M:%S %p" },
 };

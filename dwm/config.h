@@ -11,22 +11,25 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;        /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Iosevka:style:medium:size=11", "JetBrainsMono Nerd Font Mono:style:medium:size=17"};
+static const int user_bh            = 20;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
+static const char *fonts[]          = { "Symbols Nerd Font Mono:size=11", "JetBrainsMono NF SemiBold:size=11"};
 static const char dmenufont[]       = "monospace:size=12";
-static const char col_gray1[]       = "#282828";
-static const char col_gray2[]       = "#504945";
-static const char col_gray3[]       = "#bdae93";
-static const char col_gray4[]       = "#ebdbb2";
-static const char col_blue[]        = "#458588";
+static const char col_gray1[]       = "#1d2021";
+static const char col_gray2[]       = "#A66946";
+static const char col_gray3[]       = "#D99B66";
+static const char col_gray4[]       = "#D9B166";
+static const char col_blue[]        = "#593E2E";
+static const char border_active[]   = "#BF4B21";
+static const char border_normal[]   = "#3E4C59";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_blue,  col_blue},
+	[SchemeNorm] = { col_gray2, col_gray1,  border_normal},
+	[SchemeSel]  = { col_gray1, col_gray4,  border_active},
 };
 
 /* tagging */
 /* static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }; */
-static const char *tags[] = { " 󱇙 ", " 󰖟 " , "  ", "  ", "  ", "  "};
+static const char *tags[] = { " 󱇙 ", "󰖟" , "", "", "", "", "" , "" , ""};
 
 /* Lockfile */
 static char lockfile[] = "/tmp/dwm.lock";
@@ -39,14 +42,16 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     switchtotag    iscentered   isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,                0,            0,           1,           -1 },
 	{ "firefox",  NULL,       NULL,       1 << 1,           1,            0,           0,           -1 },
-    {"firefox",   "Toolkit",  "Picture-in-Picture", 0,      0,            0,           1,           -1 },
-    {"firefox",   "Library",  "Library",  0,                0,            1,           1,           -1 },
+    { "firefox",  "Toolkit",  "Picture-in-Picture", 0,      0,            0,           1,           -1 },
+    { "firefox",  "Library",  "Library",  0,                0,            1,           1,           -1 },
 	{ "krita",    NULL,       NULL,       1 << 2,           1,            0,           0,           -1 },
+    { "OpenToonz",NULL,       NULL,       1 << 2,           1,            0,           0,           -1 },
 	{ "mpv",      NULL,       NULL,       1 << 4,           1,            0,           0,           -1 },
 	{ "Thunar",   NULL,       NULL,       1 << 5,           1,            0,           0,           -1 },
     { "Emacs",    NULL,       NULL,       1 << 3,           1,            0,           0,           -1 },
 	{ "copyq",    NULL,       NULL,       0,                0,            1,           1,           -1 },
 	{ "qBittorrent",    NULL,       NULL,       1 << 5,     1,            0,           0,           -1 },
+	{ "feh",      NULL,       NULL,       0,                0,            1,           1,           -1 },
 
 };
 
@@ -122,6 +127,7 @@ static const Key keys[] = {
     { MODKEY,                       XK_b,      spawn,          {.v = browser}},
     { MODKEY|ShiftMask,             XK_period, spawn,          {.v = krita}},
     { MODKEY,                       XK_e,      spawn,          {.v = fileBrowser}},
+    { MODKEY|ShiftMask,             XK_comma,  spawn,          SHCMD("opentoonz")},
     { MODKEY|ShiftMask,             XK_w,      spawn,          SHCMD("wallpaper random")},
     { MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("wallpaper show")},
     { MODKEY|ShiftMask,             XK_x,      spawn,          SHCMD("systemctl --user restart xppentablet.service")},
@@ -130,11 +136,11 @@ static const Key keys[] = {
     { MODKEY,                       XK_bracketleft, spawn,     SHCMD("amixer set Master 5%-")},
     { MODKEY,                       XK_backslash, spawn,       SHCMD("amixer set Master toggle")},
     { MODKEY|ControlMask,           XK_l,      spawn,          SHCMD("betterlockscreen -l")},
-    { MODKEY|ShiftMask,             XK_minus,  spawn, SHCMD("betterlockscreen -s")},
+    { MODKEY|ShiftMask,             XK_minus,  spawn,          SHCMD("betterlockscreen -s")},
     { MODKEY,                       XK_a,      spawn,          SHCMD("copyq toggle")},
     { MODKEY,                       XK_o,      spawn,          SHCMD("emacsclient -c")},
     { MODKEY,                       XK_semicolon, spawn,       SHCMD("changebrightness up")},
-    { MODKEY|ShiftMask,             XK_semicolon, spawn,           SHCMD("changebrightness down")},
+    { MODKEY|ShiftMask,             XK_semicolon, spawn,       SHCMD("changebrightness down")},
     { 0,                             XK_Print,  spawn,         SHCMD("scrot ~/Pictures/Screenshots/%b%d::%H%M%S.png --focused -b && notify-send 'Screenshot taken' 'Saved in ~/Pictures/Screenshots' || exit")},
     { ShiftMask,                    XK_Print,  spawn,          SHCMD("scrot ~/Pictures/Screenshots/%b%d::%H%M%S.png --select --line mode=edge && notify-send 'Screenshot taken' 'Saved in ~/Pictures/Screenshots' || exit")},
 	TAGKEYS(                        XK_1,                      0)
